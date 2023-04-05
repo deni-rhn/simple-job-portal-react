@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Flex,
   Heading,
@@ -8,8 +8,16 @@ import {
 import { GoogleLogin } from "@react-oauth/google";
 import { DecodeGoogleCredentials } from "../../../helpers/JwtDecoder";
 import { GoogleAccountResponse } from "../../../interfaces/GoogleAccountResponse";
+import { GetUserData } from "../../../helpers/LocalStorage";
 
 const LoginPage: React.FC = () => {
+
+  useEffect(() => {
+    if (GetUserData()) {
+      window.location.href = '/';
+    }
+  }, []);
+
   return(
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
